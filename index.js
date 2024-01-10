@@ -8,7 +8,7 @@ dotenv.config();
 const connect = async () => {
   await mongoose
     .connect(
-      "mongodb+srv://subodhrana390:admin@cluster0.05lh1jt.mongodb.net/",
+      "mongodb+srv://subodhrana390:pV4n27KEoRiHwhb7@cluster0.d7m19c0.mongodb.net/?retryWrites=true&w=majority",
       { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => {
