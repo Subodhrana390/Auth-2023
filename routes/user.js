@@ -27,6 +27,7 @@ router.get("/createResetSession", controller.createResetSession); // reset all t
 
 /** PUT Methods */
 router.put("/updateuser", Auth, controller.updateUser); // is use to update the user profile// is use to update the user profile
+router.post("/createComment", Auth, controller.getSubscribe); // is use to update the user profile// is use to update the user profile
 router.put("/resetPassword", controller.verifyUser, controller.resetPassword); // use to reset password
 
 export default router;

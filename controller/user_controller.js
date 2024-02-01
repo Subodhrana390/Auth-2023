@@ -1,4 +1,5 @@
 import UserModel from "../models/user.js";
+import CommentModel from "../models/comment.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
@@ -248,6 +249,36 @@ export async function resetPassword(req, res) {
         });
     } catch (error) {
       return res.status(401).send({ error });
+    }
+  } catch (error) {
+    return res.status(401).send({ error });
+  }
+}
+
+/** GET: http://localhost:8080/api/user/example123 */
+export async function getSubscribe(req, res) {
+  try {
+    const { userId } = req.user;
+
+    if (userId) {
+      const { name, email, message } = req.body;
+
+      // update the data
+      UserModel.findOne({ _id: userId }).then(() => {
+        const comment = new CommentModel({
+          name,
+          email,
+          message,
+        });
+        comment
+          .save()
+          .then((result) =>
+            res.status(201).send({ msg: "User comment Successfully" })
+          )
+          .catch((error) => res.status(500).send({ error }));
+      });
+    } else {
+      return res.status(401).send({ error: "User Not Found...!" });
     }
   } catch (error) {
     return res.status(401).send({ error });
